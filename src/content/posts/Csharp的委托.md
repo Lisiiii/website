@@ -404,6 +404,84 @@ class Player{
 ```
 或者使用 ```Action<T>``` / ```Action<T1,T2>``` 表示**无返回值**、有参数的委托
 
+它还有一个很方便的用法：
+使用 Action 委托时，不必显式定义封装无参数过程的委托。 例如，以下代码显式声明名为 的 ShowValue 委托，并将对实例方法的 Name.DisplayToWindow 引用分配给其委托实例。
+
+``` C# 
+using System;
+using System.Windows.Forms;
+
+public delegate void ShowValue();
+
+public class Name
+{
+   private string instanceName;
+
+   public Name(string name)
+   {
+      this.instanceName = name;
+   }
+
+   public void DisplayToConsole()
+   {
+      Console.WriteLine(this.instanceName);
+   }
+
+   public void DisplayToWindow()
+   {
+      MessageBox.Show(this.instanceName);
+   }
+}
+
+public class testTestDelegate
+{
+   public static void Main()
+   {
+      Name testName = new Name("Koani");
+      ShowValue showMethod = testName.DisplayToWindow;
+      showMethod();
+   }
+}
+```
+通过Action 而不是显式定义新委托并为其分配命名方法。
+
+``` C# 
+using System;
+using System.Windows.Forms;
+
+public class Name
+{
+   private string instanceName;
+
+   public Name(string name)
+   {
+      this.instanceName = name;
+   }
+
+   public void DisplayToConsole()
+   {
+      Console.WriteLine(this.instanceName);
+   }
+
+   public void DisplayToWindow()
+   {
+      MessageBox.Show(this.instanceName);
+   }
+}
+
+public class testTestDelegate
+{
+   public static void Main()
+   {
+      Name testName = new Name("Koani");
+      Action showMethod = testName.DisplayToWindow;
+      showMethod();
+   }
+}
+```
+很方便，可以少一行。
+
+
 相对应的，```Func<...>``` 表示**有返回值**的委托，```<>``` 中前面的参数会作为委托的参数使用，而最后一个参数作为返回值:
 ```
 Func<T> ->  delegate T myDelegate();
