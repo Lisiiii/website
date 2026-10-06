@@ -1,5 +1,6 @@
-# 我的小网站，互联网沧海一粟。
-有些教程和文章，希望对你有所帮助。
+# 旧版博客网站项目（已废弃）
+[新博客项目](https://github.com/Lisiiii/kanade-blog)
+
 
 - A blog website built with [Astro](https://astro.build).
 
